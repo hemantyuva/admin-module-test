@@ -6,8 +6,8 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 5.1.4'
-# gem 'pg'
-gem 'mysql2', '>= 0.3.18', '< 0.5'
+gem 'pg'
+# gem 'mysql2', '>= 0.3.18', '< 0.5'
 gem 'puma', '3.8.2'
 gem 'figaro'
 gem 'sass-rails', '~> 5.0'
