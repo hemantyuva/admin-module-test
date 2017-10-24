@@ -16,11 +16,11 @@
 /public/uploads/*
 /public/system/*
 
-/database.yml
+
 
 # Ignore application configuration
 
 /doc/*
 /db/schema.rb
-/config/database.yml
+
 /config/secrets.yml
