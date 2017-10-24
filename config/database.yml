@@ -1,9 +1,9 @@
 default: &default
+development:
   adapter: postgresql
   encoding: unicode
+  # database: blog_development
   pool: 5
-  timeout: 5000
-  port: 5432
   username: postgres
   password: postgres
   host: localhost
