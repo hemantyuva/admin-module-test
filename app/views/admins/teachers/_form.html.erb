@@ -1,0 +1,142 @@
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>Teacher</h3>
+      </div>              
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content">
+            <%=form_for [:admins , @teacher],:html => {class: "form-horizontal form-label-left",novalidate: "novalidate"}  do |f|%>
+
+            <% if @teacher.errors.any? %>
+            <div id="error_explanation">
+             <ul>
+            <% @teacher.errors.full_messages.each do |message| %>
+            
+            <li><%= message %></li>
+            
+            <% end %>
+            </ul>
+            </div>
+            <% end %>         
+            
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Nombre <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">                         
+                <%=f.text_field :first_name,required: "required", class: "form-control col-md-7 col-xs-12"%>
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Apellidos <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">                         
+                <%=f.text_field :last_name,required: "required", class: "form-control col-md-7 col-xs-12"%>
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gender">Sexo<span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12"> 
+              <%= f.select :gender, User.genders.keys,{},class: "form-control"%>
+               
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Correo Electrónico <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">                        
+                <%=f.email_field :email,required: "required", class: "form-control col-md-7 col-xs-12"%>
+
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Contraseña <span class="required">*</span>
+              </label>
+
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.password_field :password,required: "required", class: "form-control col-md-7 col-xs-12"%> 
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="location">Confirm Contraseña  <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.password_field :password_confirmation,required: "required", class: "form-control col-md-7 col-xs-12"%>
+              </div>
+            </div> 
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="location">Status  <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">              
+                 <%= f.select :status, Teacher.statuses.keys,{},class: "form-control"%>
+              </div>
+            </div> 
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="location">Foto  <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="upload_image_right">
+                    <div class="upload_image_box">
+                        <%=image_tag(get_teacher_image(@teacher),class: "resolve",style: "height:122px; width:200px;")%>
+                    </div>
+                    <div class="upload_image_btn">
+                        <div class="fileUpload btn btn-primary">
+                            <span>+</span>
+                            <%=f.file_field :picture , class: "form-control col-md-7 col-xs-12 upload"%>
+                            <!-- <input type="file" class="upload" /> -->
+                        </div>
+                    </div>
+                    </div>
+              </div>
+            </div> 
+                      
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-6 col-md-offset-3">
+              <%=f.submit "Submit" ,class: "btn btn-success"%>
+                <!-- <button id="cancel" class="btn btn-primary">Cancel</button> -->
+                <%=link_to "cancel",admins_admins_path,class: "btn btn-primary"%>
+              </div>
+            </div>
+            <%end%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+
+          $("#teacher_picture").on('change', function () {
+
+            if (typeof(FileReader) != "undefined") {
+
+                var image_holder = $(".upload_image_box");
+                image_holder.empty();
+
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $("<img />", {
+                        "src": e.target.result,
+                        "class": "thumb-image resolve",
+                        "style": "width:120px; height:120px;"
+                    }).appendTo(image_holder);
+                }
+                image_holder.show();
+                reader.readAsDataURL($(this)[0].files[0]);
+            } else {
+                alert("This browser does not support FileReader.");
+            }
+        });
+          })
+</script>

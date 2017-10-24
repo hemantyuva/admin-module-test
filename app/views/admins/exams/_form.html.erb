@@ -1,0 +1,169 @@
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3> Exámenes </h3>
+      </div>              
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content">
+            <%=form_for [:admins , @exam],:html => {class: "form-horizontal form-label-left",novalidate: "novalidate"}  do |f|%>
+
+             <% if @exam.errors.any? %>
+            <div id="error_explanation">
+             <ul>
+            <% @exam.errors.full_messages.each do |message| %>
+            
+            <li><%= message %></li>
+            
+            <% end %>
+            </ul>
+            </div>
+            <% end %> 
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Escuela <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%= f.collection_select :school_id, get_school_list.order(:name,:id), :id, :name, {prompt: "Seleccione escuela"}, {class: "form-control"}%>
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Clave Materia <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%= f.collection_select :subject_id, Subject.order(:name,:id), :id, :name, {prompt: "Seleccione Materia"}, {class: "form-control"}%>
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Grupo <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%= f.collection_select :group_id, Group.order(:Group_ID,:id), :id, :Group_ID, {prompt: "Seleccione grupo"}, {class: "form-control"}%>
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="exam_name">Título Exámen <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">                         
+                <%=f.text_field :exam_name,required: "required", class: "form-control col-md-7 col-xs-12"%>
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="exam_date">Fecha <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.text_field :exam_date,required: "required", class: "form-control col-md-7 col-xs-12"%>                        
+
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="start_time">Hora <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">                         
+                <%=f.text_field :start_time,required: "required", class: "form-control col-md-7 col-xs-12"%>
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="end_time">Tiempo final<span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.text_field :end_time,required: "required", class: "form-control col-md-7 col-xs-12"%>                        
+
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Descripción <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.text_field :description,required: "required", class: "form-control col-md-7 col-xs-12"%>                        
+
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="notes">Notes <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.text_area :notes,required: "required", class: "form-control col-md-7 col-xs-12"%>                        
+
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="classroom">Salón <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.text_area :classroom,required: "required", class: "form-control col-md-7 col-xs-12"%>                        
+
+              </div>
+            </div>
+
+            
+            
+ 
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-6 col-md-offset-3">
+              <%=f.submit "Guardar" ,class: "btn btn-success"%>
+              <%=link_to "Cancelar",admins_exams_path,class: "btn btn-primary"%>
+              </div>
+            </div>
+            <%end%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    $('#exam_exam_date').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        locale: {
+            format: 'DD/MMM/YYYY'
+        }
+
+    }) 
+
+    $('#exam_start_time,#exam_end_time').timepicker()
+
+$("#exam_school_id").change(function(){
+    $.ajax({
+      type: "POST",
+      url: "/admins/events/get_group_by_school",
+      dataType: "json",
+      data: {
+        school: $("#exam_school_id").val()
+      },
+      success: function (result) {
+                var group = $("#exam_group_id");
+                if (result && result != null && result.groups.length > 0) {
+
+                    group.html('');
+
+                    for (var i = 0; i < result.groups.length; i++) {
+                        group.append('<option value=' + result.groups[i].id + '>' + result.groups[i].Group_ID + '</option>');
+                    }
+                    
+                }
+                else {
+                    group.html('');
+
+                }
+
+                 
+            }
+    })
+    })
+
+</script>

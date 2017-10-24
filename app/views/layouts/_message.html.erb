@@ -1,0 +1,11 @@
+<% flash.each do |name, msg| %>
+<script type="text/javascript">
+  $(document).ready(function(){
+    Lobibox.notify("<%=name%>",{
+    icon: false,
+    sound: false,
+    msg: "<%=msg%>",
+    title: "Notificación"} );
+  })
+</script>
+<% end %>

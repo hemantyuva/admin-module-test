@@ -1,0 +1,12 @@
+json.id coupon.id
+json.title coupon.title 
+json.description coupon.description
+json.image coupon.image.try(:url)
+json.coupon_code coupon.coupon_code
+json.begin_date coupon.begin_date
+json.expire_date coupon.expire_date
+json.total_coupon coupon.total_coupon
+json.status coupon.status
+json.merchant_id coupon.merchant_id
+json.created_at coupon.created_at
+json.updated_at coupon.updated_at

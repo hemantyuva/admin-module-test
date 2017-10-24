@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  image: MyString
+  coupon_code: MyString
+  begin_date: 2017-09-17
+  expire_date: 2017-09-17
+  total_coupon: 1
+  status: MyString
+  merchant: one
+
+two:
+  title: MyString
+  description: MyText
+  image: MyString
+  coupon_code: MyString
+  begin_date: 2017-09-17
+  expire_date: 2017-09-17
+  total_coupon: 1
+  status: MyString
+  merchant: two

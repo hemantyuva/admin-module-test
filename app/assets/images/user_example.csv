@@ -1,0 +1,2 @@
+id,institution_id,school_id,first_name,last_name,email,password,student_number,gender,picture,school_Grade,degree,father_name,father_email,mother_name,mother_email,Status
+,"1","1","Manish","Gupta","a@gmail.com","password","123","Male","","A","ABC","Demo","a@gmail.com","Demo","a@gmail.com","Activo"

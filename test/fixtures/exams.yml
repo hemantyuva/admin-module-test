@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  exam_name: MyString
+  exam_date: 2017-09-17
+  start_time: 2017-09-17 16:46:28
+  end_time: 2017-09-17 16:46:28
+  place: MyString
+  reminder: MyString
+  notes: MyString
+  school: one
+  subject: one
+
+two:
+  exam_name: MyString
+  exam_date: 2017-09-17
+  start_time: 2017-09-17 16:46:28
+  end_time: 2017-09-17 16:46:28
+  place: MyString
+  reminder: MyString
+  notes: MyString
+  school: two
+  subject: two

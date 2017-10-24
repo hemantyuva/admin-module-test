@@ -1,0 +1,13 @@
+json.id schedule.id
+json.ClassRoom schedule.ClassRoom
+json.Monday schedule.Monday
+json.Tuesday schedule.Tuesday
+json.Wednesday schedule.Wednesday
+json.Thursday schedule.Thursday
+json.Friday schedule.Friday
+json.Saturday schedule.Saturday
+json.subject_id schedule.subject_id
+json.group_id schedule.group_id
+json.admin_id schedule.admin_id
+json.created_at schedule.created_at
+json.updated_at schedule.updated_at

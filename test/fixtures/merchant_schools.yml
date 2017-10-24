@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  merchant: 1
+  school_id: 1
+
+two:
+  merchant: 1
+  school_id: 1

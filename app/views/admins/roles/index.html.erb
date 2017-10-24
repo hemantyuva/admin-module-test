@@ -1,0 +1,42 @@
+<div class="right_col" role="main" style="min-height: 3744px;">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+      <h3>ROLES</h3>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12 __web-inspector-hide-shortcut__">
+        <div class="x_panel">
+          <div class="x_content">
+            <div id="datatable-buttons_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">           
+                <div id="datatable-buttons_filter" class="dataTables_filter">
+                </div>
+                <table id="institution_list" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info" style="width: 968px;">
+                  <thead>
+                    <tr role="row">
+                      <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 146px;" aria-sort="ascending" aria-label="ID: activate to sort column descending">ID</th>
+                      <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 110px;" aria-label="Name: activate to sort column ascending">NOMBRE</th>                     
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <%@roles.each do |role|%>
+                    <tr role="row" class="odd">
+                      <td tabindex="0" class="sorting_1"><%=role.id%></td>
+                      <td><%=role.name%></td>
+                     
+                    </tr>
+                    <%end%>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <td>
+

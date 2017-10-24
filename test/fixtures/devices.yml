@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  devise_type: MyString
+  token: MyString
+  user: one
+
+two:
+  devise_type: MyString
+  token: MyString
+  user: two

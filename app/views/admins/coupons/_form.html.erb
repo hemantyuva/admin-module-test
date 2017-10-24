@@ -1,0 +1,149 @@
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>Cupones</h3>
+      </div>              
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content">
+            <%=form_for [:admins , @coupon],:html => {class: "form-horizontal form-label-left",novalidate: "novalidate"}  do |f|%>
+
+            <% if @coupon.errors.any? %>
+            <div id="error_explanation">
+             <ul>
+            <% @coupon.errors.full_messages.each do |message| %>
+            
+            <li><%= message %></li>
+            
+            <% end %>
+            </ul>
+            </div>
+            <% end %>            
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Proveedores <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%= f.collection_select :merchant_id, Merchant.order(:name,:id), :id, :name, {blank: false}, {class: "form-control",multiple: true}%>
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">Título <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">                         
+                <%=f.text_field :title,required: "required", class: "form-control col-md-7 col-xs-12"%>
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="coupon_code">Cupones Código <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.text_field :coupon_code,required: "required", class: "form-control col-md-7 col-xs-12"%>                        
+
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="begin_date">Fecha de inicio <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">                         
+                <%=f.date_field :begin_date,required: "required", class: "form-control col-md-7 col-xs-12"%>
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="expire_date">Fecha final<span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.date_field :expire_date,required: "required", class: "form-control col-md-7 col-xs-12"%>                        
+
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="total_coupon">Cupón total <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">                         
+                <%=f.text_field :total_coupon,required: "required", class: "form-control col-md-7 col-xs-12"%>
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Status <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">                         
+                <%=f.text_field :status,required: "required", class: "form-control col-md-7 col-xs-12"%>
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Descripción<span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">                        
+                <%=f.text_area :description,required: "required", class: "form-control col-md-7 col-xs-12"%>
+
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="image">Image  <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="upload_image_right">
+                    <div class="upload_image_box">
+                        <%=image_tag(get_coupon_image(@coupon),class: "resolve",style: "height:120px; width:120px;")%>
+                    </div>
+                    <div class="upload_image_btn">
+                        <div class="fileUpload btn btn-primary">
+                            <span>+</span>
+                            <%=f.file_field :image , class: "form-control col-md-7 col-xs-12 upload"%>
+                        </div>
+                    </div>
+                    </div>
+              </div>
+            </div>
+ 
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-6 col-md-offset-3">
+              <%=f.submit "Guardar" ,class: "btn btn-success"%>
+              <%=link_to "Cancelar",admins_coupons_path,class: "btn btn-primary"%>
+              </div>
+            </div>
+            <%end%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+$( "#coupon_merchant_id" ).select2()
+  $(document).ready(function(){
+    $("#coupon_image").on('change', function () {
+
+      if (typeof(FileReader) != "undefined") {
+
+        var image_holder = $(".upload_image_box");
+        image_holder.empty();
+
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $("<img />", {
+            "src": e.target.result,
+            "class": "thumb-image resolve",
+            "style": "width:120px; height:120px;"
+          }).appendTo(image_holder);
+        }
+        image_holder.show();
+        reader.readAsDataURL($(this)[0].files[0]);
+      } else {
+        alert("This browser does not support FileReader.");
+      }
+    });
+  })
+</script>

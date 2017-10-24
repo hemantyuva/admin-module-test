@@ -1,0 +1,17 @@
+json.id school.id
+json.name school.name
+json.location school.location
+json.description school.description
+json.contact_personal school.contact_personal
+json.contact_number school.contact_number
+json.email school.email
+json.latitude school.latitude
+json.longitude school.longitude
+json.institution_id school.institution_id
+json.created_at school.created_at
+json.updated_at school.updated_at
+json.logo school.logo
+json.country school.country
+json.state school.state
+json.status school.status
+json.contact_id school.contact_id

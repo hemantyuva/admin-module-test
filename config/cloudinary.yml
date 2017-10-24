@@ -1,0 +1,19 @@
+# ---
+# development:
+#   cloud_name: du3uybfbo
+#   api_key: '242533428757293'
+#   api_secret: L6l2OAs2N4JVNpa25T1J5u7qhtA
+#   enhance_image_tag: true
+#   static_image_support: false
+# production:
+#   cloud_name: du3uybfbo
+#   api_key: '242533428757293'
+#   api_secret: L6l2OAs2N4JVNpa25T1J5u7qhtA
+#   enhance_image_tag: true
+#   static_image_support: true
+# test:
+#   cloud_name: du3uybfbo
+#   api_key: '242533428757293'
+#   api_secret: L6l2OAs2N4JVNpa25T1J5u7qhtA
+#   enhance_image_tag: true
+#   static_image_support: false

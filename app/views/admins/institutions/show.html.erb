@@ -1,0 +1,130 @@
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>Instituciones</h3>
+      </div>              
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content">
+            <%=form_for [:admins , @institution],:html => {class: "form-horizontal form-label-left",novalidate: "novalidate"}  do |f|%>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contact">Contacto ID <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%= f.collection_select :contact_id, Contact.order(:first_name,:id), :id, :first_name, {prompt: "Select a Contact"}, {class: "form-control",disabled: true}%>                        
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Nombre <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">                         
+                <%=f.text_field :name,required: "required", class: "form-control col-md-7 col-xs-12",readonly: true%>
+              </div>
+            </div>
+            <!-- <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contact_personal">OWNER NAME <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%#=f.text_field :contact_personal,required: "required", class: "form-control col-md-7 col-xs-12",readonly: true%>                        
+
+              </div>
+            </div> -->
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Correo Electrónico<span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">                        
+                <%=f.email_field :email,required: "required", class: "form-control col-md-7 col-xs-12",readonly: true%>
+
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Teléfono<span class="required">*</span>
+              </label>
+
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.number_field :contact_number,required: "required", class: "form-control col-md-7 col-xs-12",readonly: true%> 
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="location">Ubicación <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.text_field :location,required: "required", class: "form-control col-md-7 col-xs-12",readonly: true%> 
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="country">Pais <span class="required">*</span>
+              </label>
+
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.text_field :country,required: "required", class: "form-control col-md-7 col-xs-12",readonly: true%> 
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="state">Estado  <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.text_field :state,required: "required", class: "form-control col-md-7 col-xs-12",readonly: true%> 
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="latitude">Latitude <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.text_field :latitude,required: "required", class: "form-control col-md-7 col-xs-12",readonly: true%> 
+              </div>
+            </div>
+            
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="longitude">Longitude <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.text_field :longitude,required: "required", class: "form-control col-md-7 col-xs-12",readonly: true%> 
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Status <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.text_field :status,required: "required", class: "form-control col-md-7 col-xs-12",readonly: true%> 
+              </div>
+            </div>
+             <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Description">Descripción <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.text_area :description,required: "required", class: "form-control col-md-7 col-xs-12",readonly: true%> 
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="location">Logo <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="upload_image_right">
+                    <div class="upload_image_box">
+                        <%=image_tag(get_institute_image(@institution),class: "resolve",style: "height:120px; width:120px;")%>
+                    </div>
+                    </div>
+              </div>
+            </div> 
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-6 col-md-offset-3">
+             
+                <%=link_to "Editar",edit_admins_institution_path(@institution),class: "btn btn-primary"%>
+                <%=link_to "Cancelar",admins_institutions_path,class: "btn btn-primary"%>
+              </div>
+            </div>
+            <%end%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

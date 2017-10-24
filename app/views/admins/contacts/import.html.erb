@@ -1,0 +1,42 @@
+<div class="right_col" role="main">
+	<div class="">
+		<div class="page-title">
+			<div class="title_left">
+				<h3>Import Contacto</h3>
+				</div>              
+		</div>
+		<div class="clearfix"></div>
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="x_panel">
+					<div class="x_content">
+						<%= form_for @import_contact, url: contact_import_admins_contacts_path, method: :post,html:{class: "form-inline"} do |f| %>
+						<% if @import_contact.errors.any? %>
+						<div id="error_explanation">
+							<ul>
+								<% @import_contact.errors.full_messages.each do |message| %>
+
+								<li><%= message %></li>
+
+								<% end %>
+							</ul>
+						</div>
+						<% end %>
+
+						<div class="form-group">
+							<label>CSV FILE <span class="required">*</span>
+							</label>
+							<%=f.file_field :file,required: "required", class: "form-control-plaintext"%>
+						</div>
+
+						<%=f.submit "Importe" ,class: "btn btn-success"%> 
+
+						<%end%>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<%= link_to 'descarga de muestra', asset_path("contact_example.csv"), download: 'contact_example.csv' %>
+	</div>
+</div>

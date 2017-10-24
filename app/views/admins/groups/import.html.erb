@@ -1,0 +1,43 @@
+<div class="right_col" role="main">
+	<div class="">
+		<div class="page-title">
+			<div class="title_left">
+				<h3>Import Grupo</h3>
+				</div>              
+		</div>
+		<div class="clearfix"></div>
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="x_panel">
+					<div class="x_content">
+						<%= form_for @import_group, url: group_import_admins_groups_path, method: :post,html:{class: "form-inline"} do |f| %>
+						<% if @import_group.errors.any? %>
+						<div id="error_explanation">
+							<ul>
+								<% @import_group.errors.full_messages.each do |message| %>
+
+								<li><%= message %></li>
+
+								<% end %>
+							</ul>
+						</div>
+						<% end %>
+
+						<div class="form-group">
+							<label>CSV FILE <span class="required">*</span>
+							</label>
+							<%=f.file_field :file,required: "required", class: "form-control-plaintext"%>
+						</div>
+
+						<%=f.submit "Importe" ,class: "btn btn-success"%> 
+
+						<%end%>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<%= link_to 'descarga de muestra
+', asset_path("group_example.csv"), download: 'group_example.csv' %>
+	</div>
+</div>

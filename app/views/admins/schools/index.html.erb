@@ -1,0 +1,65 @@
+<div class="right_col" role="main" style="min-height: 3744px;">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+      <h3><%=link_to "Escuelas nuevas",new_admins_school_path ,:class=>"btn btn-primary"%></h3>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12 __web-inspector-hide-shortcut__">
+        <div class="x_panel">
+          <div class="x_content">
+            <div id="datatable-buttons_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+              <div class="dt-buttons btn-group">
+               <a class="btn btn-default buttons-csv buttons-html5 btn-sm" tabindex="0" aria-controls="datatable-buttons" href="<%=import_admins_schools_path%>">
+                  <span>CSV</span>
+                </a>
+                <a class="btn btn-default buttons-excel buttons-flash btn-sm" tabindex="0" aria-controls="datatable-buttons" href="javascript:void(0)">
+                  <span>Excel</span>                  
+                  </a>
+                </div>
+                <div id="datatable-buttons_filter" class="dataTables_filter">
+                </div>
+                <table id="school_list" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info">
+                  <thead>
+                    <tr role="row">
+                      <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" aria-sort="ascending" aria-label="ID: activate to sort column descending">ID</th>
+                      <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Nombre</th>
+                     
+                      <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" aria-label="Contact: activate to sort column ascending">Institucion ID</th>
+                      <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" aria-label="Contact: activate to sort column ascending">Contacto ID</th>
+                     
+                      <!-- <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" aria-label="country: activate to sort column ascending">country</th> -->
+                      <!-- <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" aria-label="state: activate to sort column ascending">State</th> -->
+
+                      <th>Acción</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <%@schools.each do |school|%>
+                    <tr role="row" class="odd">
+                      <td tabindex="0" class="sorting_1"><%=school.id%></td>
+                      <td><%=school.name%></td>
+                      <td><%=school.institution.try(:name)%></td>
+                      <td><%=school.contact.try(:first_name)%></td>
+                    
+                      <td>
+                        <a class="btn btn-warning btn-xs" href="<%= admins_school_path(school) %>" > <i class="fa fa-eye" aria-hidden="true"></i>
+                        </a>
+                        <a class="btn btn-success btn-xs" href="<%=edit_admins_school_path(school)%>" ><i class="fa fa-fw fa-edit"></i></a>              
+                        <%= link_to "<i class='fa fa-fw fa-close'></i>".html_safe , admins_school_path(school), method: :delete, data: { confirm: 'Esta Seguro?' }, class:'btn btn-danger btn-xs' %>
+                      </td>
+                    </tr>
+                    <%end%>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <td>
+

@@ -1,0 +1,127 @@
+
+<div class="col-md-3 left_col">
+  <div class="left_col scroll-view">
+    <div class="navbar nav_title " style="border: 0;">
+       <a href="<%=root_path%>" class="site_title"><i class="login-logo"></i> <span>Studo</span></a>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="profile clearfix">
+      <div class="profile_pic">
+        <img src="<%=current_admin.try(:image).try(:url)%>" alt="..." class="img-circle profile_img">
+      </div>
+      <div class="profile_info">
+        <span>Welcome,</span>
+        <h2><%=current_admin.name.titleize%></h2>
+      </div>
+    </div>
+
+    <br>
+    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+      <div class="menu_section">
+
+        <ul class="nav side-menu" style="">
+          <li class=""><a href="<%=root_path%>"> Tablero </a>
+          </li>
+          <li class=""><a><i class="fa fa-tags"></i> Ajustes <span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu" style="display: none;">
+              <%if admin_access%>
+              <li class=""><a href="<%=admins_general_configurations_path%>">Configuración general</a></li>
+              <%end%>
+              <%if admin_all_access%>
+              <li><a href="<%=admins_admins_path%>">Usuarios</a></li>
+              <%end%>
+              <%if admin_access%>
+              <li><a href="<%=admins_roles_path%>">Roles</a></li>
+              <%end%>
+            </ul>
+          </li>
+          <li><a><i class="fa fa-file-text-o"></i> Catálogos <span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu" style="">
+              <%if admin_access%>
+              <li><a href="<%=admins_contacts_path%>">Contactos</a></li>
+
+              <li><a href="<%=admins_institutions_path%>">Instituciones</a></li>
+              <%end%>
+              <%if admin_sm_sas_access%>
+              <li><a href="<%=admins_schools_path%>">Escuelas</a></li>
+              <%end%>
+              <%if admin_all_access%>
+              <li><a href="<%=admins_users_path%>">Estudiantes</a></li>
+              <%end%>
+              <%if admin_access%>
+              <!-- <li><a href="<%#=admins_teachers_path%>"> Maestros</a></li> -->
+              <li><a href="<%=admins_groups_path%>">Grupos de Clases</a></li>
+              <%end%>
+              <%if admin_all_access%>
+              <!-- <li><a href="<%#=admins_school_classes_path%>">Clases</a></li> --> 
+              <li><a href="<%=admins_subjects_path%>">Subjects</a></li>
+              <%end%>
+              <%if admin_s_manager_access%>
+              <li><a href="<%=admins_assignments_path%>">Asignaciones</a></li>
+              <%end%>
+              <%if admin_all_access%>
+              <li><a href="<%=admins_exam_results_path%>">Calificaciones</a></li>
+              <li><a href="<%=admins_schedules_path%>">Horarios</a></li>
+              <%end%>
+
+            </ul>
+          </li>
+          <%if admin_sm_sas_access%>
+          <li><a href="<%=admins_services_path%>"><i class="fa fa-newspaper-o"></i> Servicios </a> 
+
+          </li>
+          <%end%>
+          <%if promotion_access%>
+          <li class=""><a><i class="fa fa-tags"></i> Promociones <span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu" style="display: none;">
+              <%if admin_access%>
+              <li><a href="<%=admins_merchants_path%>">Proveedores</a></li>
+              <%end%>
+
+              <li><a href="<%=admins_coupons_path%>">Cupones</a></li>
+
+            </ul>
+          </li>
+          <%end%>
+          <%if admin_all_access%>
+          <li><a href="<%=admins_home_works_path%>"><i class="fa fa-book"></i> Tareas </a>
+          </li>
+          <li><a href="<%=admins_exams_path%>"><i class="fa fa-book"></i> Exámenes </a>
+          </li>
+          <li><a href="<%=admins_events_path%>"><i class="fa fa-book"></i> Eventos </a>
+          </li>
+          <%end%>
+          <li><a href="javascript:void(0)"><i class="fa fa-book"></i> Conversaciones </a>
+          </li>
+
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="top_nav">
+  <div class="nav_menu">
+    <nav>
+      <div class="nav toggle">
+        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+      </div>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li class="">
+          <a href="javascript:void(0)" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <img src="<%=current_admin.try(:image).try(:url)%>" alt=""><%=current_admin.name.titleize%>
+            <span class=" fa fa-angle-down"></span>
+          </a>
+          <ul class="dropdown-menu dropdown-usermenu pull-right">
+            <li><a href="<%=get_profile_admins_admins_path  %>"> Profile</a></li>
+            <li><%= link_to "<i class='fa fa-sign-out pull-right'></i> Salir".html_safe , destroy_admin_session_path, :method => :delete%></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

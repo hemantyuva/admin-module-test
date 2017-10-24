@@ -1,0 +1,57 @@
+    .upload_image_left {
+        width: 50%;
+        float: left;
+    }
+
+    .upload_image_right {
+        float: left;
+    }
+
+    .upload_image_box {
+        border: 1px solid #ccc;
+        width: 202px;
+        height: 123px;
+        display: inline-block;
+        margin-top: 12px;
+    }
+
+    .upload_image_btn {
+        float: right;
+    }
+
+    .fileUpload {
+        position: relative;
+        overflow: hidden;
+        margin: 10px;
+    }
+    .fileUpload input.upload {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        width:120px;
+        height: 120px;
+        filter: alpha(opacity=0);
+    }
+
+.login-logo {
+    background: url(/assets/Logo.png) no-repeat scroll center center;
+    
+    height: 107px;
+    margin-top: 16px;
+    width: 82%;
+}
+
+/*    #csv-upload {
+    display: none;
+}
+.custom-csv-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}*/

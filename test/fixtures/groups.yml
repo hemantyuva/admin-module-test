@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Group_ID: MyString
+  description: MyString
+  school: one
+
+two:
+  Group_ID: MyString
+  description: MyString
+  school: two

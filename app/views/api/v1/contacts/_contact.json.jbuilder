@@ -1,0 +1,10 @@
+json.id contact.id
+json.first_name contact.first_name
+json.last_name contact.last_name
+json.email contact.email
+json.phone_number contact.phone_number
+json.mobile_number contact.mobile_number
+json.skype contact.skype
+json.notes contact.notes
+json.created_at contact.created_at.strftime("%d/%m/%Y")
+json.updated_at contact.updated_at.strftime("%d/%m/%Y")

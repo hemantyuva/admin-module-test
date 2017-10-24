@@ -1,0 +1,149 @@
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>Eventos</h3>
+      </div>              
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content">
+            <%=form_for [:admins , @event],:html => {class: "form-horizontal form-label-left",novalidate: "novalidate"}  do |f|%>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Escuela <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%= f.collection_select :school_id, School.order(:name,:id), :id, :name, {prompt: "Select a Escuela"}, {class: "form-control",disabled: true}%>                        
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Grupo <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+               <%= f.collection_select :group_id, @event.groups.order(:Group_ID,:id), :id, :Group_ID, {}, {class: "form-control",required: true,multiple: true}%>                         
+              </div>
+            </div> 
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="start_date">Titulo Evento <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">                         
+                <%=f.text_field :title,required: "required", class: "form-control col-md-7 col-xs-12",readonly: true%>
+              </div>
+            </div>           
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="start_date">Fecha Inicio<span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">                         
+                <%=f.date_field :start_date,required: "required", class: "form-control col-md-7 col-xs-12",readonly: true%>
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="end_date">Fecha Fin <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.date_field :end_date,required: "required", class: "form-control col-md-7 col-xs-12",readonly: true%>                        
+
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="start_time">Hora Inicio<span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">                        
+                <%=f.time_field :start_time,required: "required", class: "form-control col-md-7 col-xs-12",readonly: true%>
+
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="end_time">Hora Fin <span class="required">*</span>
+              </label>
+
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.time_field :end_time,required: "required", class: "form-control col-md-7 col-xs-12",readonly: true%> 
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="location">Ubicación  <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.text_field :location,required: "required", class: "form-control col-md-7 col-xs-12",readonly: true%> 
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="event_type">Tipo Evento  <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.text_field :event_type,required: "required", class: "form-control col-md-7 col-xs-12",readonly: true%>                        
+
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="reminder">reminder  <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.text_field :reminder,required: "required", class: "form-control col-md-7 col-xs-12",readonly: true%>                        
+
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Description">Descripción <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.text_area :description,required: "required", class: "form-control col-md-7 col-xs-12",readonly: true%> 
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="notes">Notas <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">                         
+                <%=f.text_area :notes,required: "required", class: "form-control col-md-7 col-xs-12",readonly: true%>
+              </div>
+            </div>
+
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="notes">Added By <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">                         
+                <%=f.text_field :added_by,required: "required", class: "form-control col-md-7 col-xs-12",readonly: true%>
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="admin_id">Userio <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+              <%if @event.admin.present?%>
+                <%=f.text_field :admin_id,required: "required", class: "form-control col-md-7 col-xs-12",value: @event.admin.email ,readonly: true%>
+                <%else%>
+                <%=f.text_field :user_id,required: "required", class: "form-control col-md-7 col-xs-12",value: @event.user.email ,readonly: true%>
+                <%end%>
+              </div>
+            </div>
+
+
+
+           
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-6 col-md-offset-3">
+                <%=link_to "Editar",edit_admins_event_path(@event),class: "btn btn-primary"%>
+                <%=link_to "Cancelar",admins_events_path,class: "btn btn-primary"%>
+              </div>
+            </div>
+            <%end%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,107 @@
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>Horarios</h3>
+      </div>              
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content">
+            <%=form_for [:admins , @schedule],:html => {class: "form-horizontal form-label-left",novalidate: "novalidate"}  do |f|%>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contact">Profesor <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+              <%role_teacher = Role.find_by(:name=> 'Teachers').id%>
+                <%= f.collection_select :admin_id, Admin.where(role_id: role_teacher).order(:email,:id), :id, :email, {prompt: "Profesor"}, {class: "form-control",disabled: true}%>                        
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contact">Materia <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%= f.collection_select :subject_id, Subject.order(:name,:id), :id, :name, {prompt: "Materia"}, {class: "form-control",disabled: true}%>                        
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contact">Grupo <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%= f.collection_select :group_id,  Group.order(:Group_ID,:id), :id, :Group_ID, {prompt: "Grupo"}, {class: "form-control",disabled: true}%>                        
+              </div>
+            </div>
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Salón">Salón <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">                         
+                <%=f.text_field :ClassRoom, class: "form-control col-md-7 col-xs-12",readonly: true%>
+              </div>
+            </div>
+            
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Monday">Lunes  <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.text_field :Monday, class: "form-control col-md-7 col-xs-12",readonly: true%> 
+              </div>
+            </div>
+
+             <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Martes">Martes  <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.text_field :Tuesday, class: "form-control col-md-7 col-xs-12",readonly: true%> 
+              </div>
+            </div>
+             <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Miercoles">Miercoles  <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.text_field :Wednesday, class: "form-control col-md-7 col-xs-12",readonly: true%> 
+              </div>
+            </div>
+
+             <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Thursday"> Jueves <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.text_field :Thursday, class: "form-control col-md-7 col-xs-12",readonly: true%> 
+              </div>
+            </div>
+
+             <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Friday">Viernes  <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.text_field :Friday, class: "form-control col-md-7 col-xs-12",readonly: true%> 
+              </div>
+            </div>
+
+             <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Sabado">Sabado  <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <%=f.text_field :Saturday , class: "form-control col-md-7 col-xs-12",readonly: true%> 
+              </div>
+            </div>
+            
+
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-6 col-md-offset-3">
+             
+                <%=link_to "Editar",edit_admins_schedule_path(@schedule),class: "btn btn-primary"%>
+                 <%=link_to "Cancelar",admins_schedules_path,class: "btn btn-primary"%>
+              </div>
+            </div>
+            <%end%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

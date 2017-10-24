@@ -1,0 +1,283 @@
+<section class="content">
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+<!-- <script src="https://code.highcharts.com/modules/exporting.js"></script> -->
+
+<div class="right_col" role="main" style="min-height: 1381px;">
+  <div class="">
+    <div class="row top_tiles">
+      <div class="animated flipInY col-lg-4 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+          <div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
+          <div class="count"><%=@user_count%></div>
+          <h3>Students</h3>
+
+        </div>
+      </div>      
+      <div class="animated flipInY col-lg-4 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+          <div class="icon"><i class="fa fa-sort-amount-desc"></i></div>
+          <div class="count"><%=@school_count%></div>
+          <h3>Escuelas</h3>
+
+        </div>
+      </div>
+      <div class="animated flipInY col-lg-4 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+          <div class="icon"><i class="fa fa-comments-o"></i></div>
+          <div class="count"><%=@institution_count%></div>
+          <h3>Instituciones</h3>
+        </div>
+      </div>
+     <!--  <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+          <div class="icon"><i class="fa fa-check-square-o"></i></div>
+          <div class="count">179</div>
+          <h3>New Sign ups</h3>
+
+        </div>
+      </div> -->
+    </div>
+
+    <div class="row">
+    <div class="col-md-6 chart_data">
+      <div class="info-box">
+        <div id="container_user"></div>
+      </div>
+    </div>
+    <div class="col-md-6 chart_data">
+      <div class="info-box">
+        <div id="container_institution"></div>
+      </div>
+    </div> 
+
+    <div class="col-md-6 chart_data">
+      <div class="info-box">
+        <div id="container_school"></div>
+      </div>
+    </div>
+    
+    </div>
+
+
+
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  var user_per_monyh = jQuery.parseJSON(JSON.stringify(<%=raw @user_with_month.to_json%>))
+  Highcharts.chart('container_user', {
+    chart: {
+      type: 'area',
+
+    },
+    colors: ['#FF5B33'],
+    title: {
+      text: 'Estudiantes este mes'
+    },
+
+    xAxis: {
+      type: '',
+      categories:<%=@month %>,
+      labels:{
+        useHTML: true,
+        style:{
+
+          whiteSpace: 'normal',
+        },
+        step: 1,
+        formatter: function(){
+          return '<div align="center" style="word-wrap: break-word; word-break: break-all; width: 50px;">'+ this.value+'</div>';
+        }
+      }
+    },
+    yAxis: {
+      title: {
+        text: '',
+        enabled: false,
+
+      }
+
+    },
+    legend: {
+      enabled: false
+    },
+    plotOptions: {
+      series: {
+        dataLabels: {
+          enabled: true,
+          rotation: -90,
+          color: '#FFFFFF',
+
+          align: 'left',
+          format: '{point.y:.2f}', 
+          y: 30, 
+          style: {
+            fontSize: '10px',
+            fontFamily: 'Verdana, sans-serif'
+          }
+        },
+      }
+    },
+    tooltip: {
+      headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+      pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b> del total<br/>'
+    },
+
+    series: [{
+      name: 'Escuelas',
+      colorByPoint: false,
+      data: user_per_monyh
+    }]
+  });
+
+
+
+  //school per month
+
+  var school_per_month = jQuery.parseJSON(JSON.stringify(<%=raw @school_with_month.to_json%>))
+  Highcharts.chart('container_school', {
+    chart: {
+      type: 'line',
+
+    },
+    colors: ['#FF5B33'],
+    title: {
+      text: 'Escuelas este mes'
+    },
+
+    xAxis: {
+      type: '',
+      categories:<%=@month %>,
+      labels:{
+        useHTML: true,
+        style:{
+
+          whiteSpace: 'normal',
+        },
+        step: 1,
+        formatter: function(){
+          return '<div align="center" style="word-wrap: break-word; word-break: break-all; width: 50px;">'+ this.value+'</div>';
+        }
+      }
+    },
+    yAxis: {
+      title: {
+        text: '',
+        enabled: false,
+
+      }
+
+    },
+    legend: {
+      enabled: false
+    },
+    plotOptions: {
+      series: {
+        dataLabels: {
+          enabled: true,
+          rotation: -90,
+          color: '#FFFFFF',
+
+          align: 'left',
+          format: '{point.y:.2f}', 
+          y: 30, 
+          style: {
+            fontSize: '10px',
+            fontFamily: 'Verdana, sans-serif'
+          }
+        },
+       
+      }
+    },
+    tooltip: {
+      headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+      pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b> del total<br/>'
+    },
+
+    series: [{
+      name: 'Estudiantes',
+      colorByPoint: false,
+      data: school_per_month
+    }]
+  });
+
+
+  //Institution per month
+
+  var institution_per_month = jQuery.parseJSON(JSON.stringify(<%=raw @institution_with_month.to_json%>))
+  Highcharts.chart('container_institution', {
+    chart: {
+      type: 'pie',
+
+    },
+    colors: ['#FF5B33'],
+    title: {
+      text: 'Instituciones este mes'
+    },
+
+    xAxis: {
+      type: '',
+      categories:<%=@month %>,
+      labels:{
+        useHTML: true,
+        style:{
+
+          whiteSpace: 'normal',
+        },
+        step: 1,
+        formatter: function(){
+          return '<div align="center" style="word-wrap: break-word; word-break: break-all; width: 50px;">'+ this.value+'</div>';
+        }
+      }
+    },
+    yAxis: {
+      title: {
+        text: '',
+        enabled: false,
+
+      }
+
+    },
+    legend: {
+      enabled: false
+    },
+    plotOptions: {
+      series: {
+        dataLabels: {
+          enabled: true,
+          rotation: -90,
+          color: '#FFFFFF',
+
+          align: 'left',
+          format: '{point.y:.2f}', 
+          y: 30, 
+          style: {
+            fontSize: '10px',
+            fontFamily: 'Verdana, sans-serif'
+          }
+        },
+       
+      }
+    },
+    tooltip: {
+      headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+      pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b> del total<br/>'
+    },
+
+    series: [{
+      name: 'instituciones',
+      colorByPoint: false,
+      data: institution_per_month
+    }]
+  });
+</script>
+
+     <style type="text/css">
+       .highcharts-credits{
+        display: none;
+       }
+
+     </style>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  deadline_date: 2017-09-17
+  deadline_time: MyString
+  description: MyText
+  reminder: MyString
+  subject: one
+
+two:
+  deadline_date: 2017-09-17
+  deadline_time: MyString
+  description: MyText
+  reminder: MyString
+  subject: two

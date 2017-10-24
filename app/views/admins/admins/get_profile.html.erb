@@ -1,0 +1,85 @@
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>Profile Update</h3>
+      </div>              
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content">
+            <%=form_for  @profile,url: update_profile_admins_admins_path,method: :post ,:html => {class: "form-horizontal form-label-left",novalidate: "novalidate"}  do |f|%>            
+            
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">name <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">                         
+                <%=f.text_field :name,required: "required", class: "form-control col-md-7 col-xs-12"%>
+              </div>
+            </div>            
+             
+            <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="location">Image  <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="upload_image_right">
+                    <div class="upload_image_box">
+                        <%=image_tag(get_image(),class: "resolve",style: "height:120px; width:120px;")%>
+                    </div>
+                    <div class="upload_image_btn">
+                        <div class="fileUpload btn btn-primary">
+                            <span>+</span>
+                            <%=f.file_field :image , class: "form-control col-md-7 col-xs-12 upload"%>
+                            <!-- <input type="file" class="upload" /> -->
+                        </div>
+                    </div>
+                    </div>
+              </div>
+            </div>           
+
+                      
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div class="col-md-6 col-md-offset-3">
+              <%=f.submit "Submit" ,class: "btn btn-success"%>
+                <!-- <button id="cancel" class="btn btn-primary">Cancel</button> -->
+                <%#=link_to "cancel",admins_admins_path,class: "btn btn-primary"%>
+              </div>
+            </div>
+            <%end%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+
+          $("#admin_image").on('change', function () {
+
+            if (typeof(FileReader) != "undefined") {
+
+                var image_holder = $(".upload_image_box");
+                image_holder.empty();
+
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $("<img />", {
+                        "src": e.target.result,
+                        "class": "thumb-image resolve",
+                        "style": "width:120px; height:120px;"
+                    }).appendTo(image_holder);
+                }
+                image_holder.show();
+                reader.readAsDataURL($(this)[0].files[0]);
+            } else {
+                alert("This browser does not support FileReader.");
+            }
+        });
+          })
+</script>
