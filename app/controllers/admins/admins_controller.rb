@@ -58,6 +58,7 @@ class Admins::AdminsController < ApplicationController
 
 	def update
 		if @admin.update(params_admin)
+			AdminSchool.find_by_admin_id(@admin.id).update_attributes(school_id: params[:admin][:school_id].last)
 			flash[:success]="Admin actualizadas con éxito"
 			redirect_to admins_admins_path
 		else
