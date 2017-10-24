@@ -41,7 +41,10 @@ class Admins::AdminsController < ApplicationController
 		
 	end
 	def edit
-		
+		admin = Admin.find(params[:id])
+        @institution = admin.institution
+		@schools = admin.schools
+		@admin = admin
 	end
 
 	def get_school_by_institution

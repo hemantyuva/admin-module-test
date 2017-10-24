@@ -36,14 +36,14 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contact">Institucion ID <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <%= f.collection_select :institution_id, Institution.order(:name,:id), :id, :name, {prompt: "Seleccionar Institucion"}, {class: "form-control"}%>                        
+                <%= f.collection_select :institution_id, Institution.order(:name,:id), :id, :name,{selected: [@institution.id] ,prompt: "Seleccionar Institucion"}, {class: "form-control"}%>                        
               </div>
             </div>
             <div class="item form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Escuela <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <%= f.collection_select :school_id, School.order(:name,:id), :id, :name, {}, {class: "form-control",multiple: true}%>
+                <%= f.collection_select :school_id, School.order(:name,:id), :id, :name, {selected: @schools.map(&:id)}, {class: "form-control",multiple: true}%>
               </div>
             </div>
 
@@ -103,23 +103,24 @@ $("#admin_institution_id").change(function(){
         institution: $("#admin_institution_id").val()
       },
       success: function (result) {
-                var school = $("#admin_school_id");
-                if (result && result != null && result.schools.length > 0) {
+        var school = $("#admin_school_id");
+          school.val("")
+          if (result && result != null && result.schools.length > 0) {
 
-                    school.html('');
+              school.html('');
 
-                    for (var i = 0; i < result.schools.length; i++) {
-                        school.append('<option value=' + result.schools[i].id + '>' + result.schools[i].name + '</option>');
-                    }
-                    
-                }
-                else {
-                    school.html('');
+              for (var i = 0; i < result.schools.length; i++) {
+                  school.append('<option value=' + result.schools[i].id + '>' + result.schools[i].name + '</option>');
+              }
+              
+          }
+          else {
+              school.html('');
 
-                }
+          }
 
-                 
-            }
+           
+      }
     })
     })
 
