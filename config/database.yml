@@ -72,7 +72,7 @@ staging:
 production:
   <<: *default
   username: rails
-  password: <%= ENV['APP_DATABASE_PASSWORD'] %>
+  password: adminmodule1$
   
   database: studoapp_production
 
