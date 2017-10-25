@@ -6,10 +6,18 @@
 # server "example.com", user: "deploy", roles: %w{app db web}, my_property: :my_value
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 
-server "198.199.108.137",
+# server "198.199.108.137",
+#   user: "root",
+#   roles: %w{app db web},
+#   ssh_options: { forward_agent: true }
+
+
+
+server "165.227.120.4",
   user: "root",
   roles: %w{app db web},
   ssh_options: { forward_agent: true }
+
 
 # role-based syntax
 # ==================
