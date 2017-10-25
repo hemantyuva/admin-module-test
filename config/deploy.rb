@@ -2,7 +2,8 @@
 lock "3.9.1"
 
 set :application, 'studo'
-set :repo_url, 'git@gitlab.agilekoding.com:studo/admin_module.git' # Edit this to match your repository
+# set :repo_url, 'git@gitlab.agilekoding.com:studo/admin_module.git' 
+set :repo_url, 'git@github.com:satyampawar/admin-module-test.git'# Edit this to match your repository
 set :branch, :master
 
 
