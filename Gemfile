@@ -41,6 +41,10 @@ gem 'devise'
 gem 'momentjs-rails'
 gem 'pry'
 gem 'carrierwave' # used for image upload
+
+group :production do
+  gem 'rails_12factor'
+end
 # gem 'rmagick'
 # gem 'cloudinary'
 gem "font-awesome-rails"
