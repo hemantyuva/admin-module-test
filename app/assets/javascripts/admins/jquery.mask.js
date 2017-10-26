@@ -128,7 +128,7 @@
 
 function mobileNumberFormat(){
   
-  $(".mobile_number_format").mask("(999) 999-9999"); 
+  $(".mobile_number_format").mask("(999) 999-99-99"); 
   	$(".mobile_number_format").on("blur", function() {
   		var last = $(this).val().substr( $(this).val().indexOf("-") + 1 );
 
