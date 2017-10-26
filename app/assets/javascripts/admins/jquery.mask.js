@@ -126,21 +126,21 @@
 
 
 
+function mobileNumberFormat(){
+  
+  $(".mobile_number_format").mask("(999) 999-9999"); 
+  	$(".mobile_number_format").on("blur", function() {
+  		var last = $(this).val().substr( $(this).val().indexOf("-") + 1 );
 
-$(document).ready(function(){
-$(".mobile_number_format").mask("(999) 999-9999"); 
-	$(".mobile_number_format").on("blur", function() {
-		var last = $(this).val().substr( $(this).val().indexOf("-") + 1 );
+  		if( last.length == 3 ) {
+  		  var move = $(this).val().substr( $(this).val().indexOf("-") + 1, 1 );
 
-		if( last.length == 3 ) {
-		  var move = $(this).val().substr( $(this).val().indexOf("-") + 1, 1 );
+  		  var lastfour = last.substr(1,4);
 
-		  var lastfour = last.substr(1,4);
+  		  var first = $(this).val().substr( 0, 9 );
 
-		  var first = $(this).val().substr( 0, 9 );
+  		  $(this).val( first + move + '-' + lastfour );
+  		}
+  	});
 
-		  $(this).val( first + move + '-' + lastfour );
-		}
-	});
-
-	})
+}
