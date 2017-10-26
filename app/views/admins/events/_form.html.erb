@@ -57,14 +57,14 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="start_date">Fecha Inicio<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">                         
-                <%=f.date_field :start_date,required: "required", class: "form-control col-md-7 col-xs-12"%>
+                <%=f.text_field :start_date,required: "required", class: "form-control col-md-7 col-xs-12"%>
               </div>
             </div>
             <div class="item form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="end_date">Fecha Fin <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <%=f.date_field :end_date,required: "required", class: "form-control col-md-7 col-xs-12"%>                        
+                <%=f.text_field :end_date,required: "required", class: "form-control col-md-7 col-xs-12"%>                        
 
               </div>
             </div>
@@ -73,7 +73,7 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="start_time">Hora Inicio<span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">                        
-                <%=f.time_field :start_time,required: "required", class: "form-control col-md-7 col-xs-12"%>
+                <%=f.text_field :start_time,required: "required", class: "form-control col-md-7 col-xs-12"%>
 
               </div>
             </div>
@@ -82,7 +82,7 @@
               </label>
 
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <%=f.time_field :end_time,required: "required", class: "form-control col-md-7 col-xs-12"%> 
+                <%=f.text_field :end_time,required: "required", class: "form-control col-md-7 col-xs-12"%> 
               </div>
             </div>
             <div class="item form-group">
@@ -144,14 +144,14 @@
 
 <script type="text/javascript">
 $( "#event_group_id" ).select2()
-$('#event_start_date,#event_end_date').daterangepicker({
-        singleDatePicker: true,
-        showDropdowns: true,
-        locale: {
-            format: 'DD/MM/YYYY'
-        }
-
-    }) 
+// $('#event_start_date,#event_end_date')
+$('input[name="event[start_date]"], input[name="event[end_date]"]').daterangepicker({
+      singleDatePicker: true,
+      showDropdowns: true,
+      locale: {
+          format: 'DD-MM-YYYY'
+      }
+}) 
 
     $('#event_start_time,#event_end_time').timepicker()
 $("#event_school_id").change(function(){
