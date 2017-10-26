@@ -11,7 +11,7 @@ class School < ApplicationRecord
 	mount_uploader :logo, ImageUploader
 	enum status: [ :Inactivo, :Activo,:Suspendido,:Eliminado]
 	validates_presence_of :name,:location,:latitude,:longitude,:institution_id,:status,:contact_id
-	
+	validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
 def self.school_per_month(month)
     day_in_month = month

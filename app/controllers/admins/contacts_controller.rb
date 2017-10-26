@@ -19,6 +19,7 @@ class Admins::ContactsController < ApplicationController
 			flash[:success]="Contacto creado correctamente"
 			redirect_to admins_contacts_path
 		else
+			flash[:error]= @contact.errors.messages
 			render :new
 		end
 	end
@@ -36,6 +37,7 @@ class Admins::ContactsController < ApplicationController
 			flash[:success]="Contacto actualizado correctamente"
 			redirect_to admins_contacts_path
 		else
+			flash[:error]= @contact.errors.messages
 			render :new
 		end		
 	end

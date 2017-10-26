@@ -22,6 +22,7 @@
 //= require admins/jquery.validate.min.js
 //= require admins/date.js
 //= require admins/daterangepicker.js
+//= require admins/jquery.mask.js
 //= require admins/fastclick.js
 //= require admins/icheck.min.js
 //= require admins/jquery.dataTables.min.js

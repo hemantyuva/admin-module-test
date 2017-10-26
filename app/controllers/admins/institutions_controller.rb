@@ -19,6 +19,7 @@ class Admins::InstitutionsController < ApplicationController
 			flash[:success]="Institución creada con éxito"
 			redirect_to admins_institutions_path
 		else
+			flash[:error]= @institution.errors.messages
 			render :new
 		end
 	end
@@ -53,6 +54,7 @@ class Admins::InstitutionsController < ApplicationController
 			flash[:success]="Institución actualizada con éxito"
 			redirect_to admins_institutions_path
 		else
+			flash[:error]= @institution.errors.messages
 			render :new
 		end		
 	end

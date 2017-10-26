@@ -22,6 +22,7 @@ class Admins::SchoolsController < ApplicationController
 			flash[:success] = "Escuela creada con éxito"
 			redirect_to admins_schools_path
 		else
+			flash[:error]= @school.errors.messages
 			render :new
 		end
 	end
@@ -42,6 +43,7 @@ class Admins::SchoolsController < ApplicationController
 			flash[:success] = "Escuela actualizada con éxito"
 			redirect_to admins_schools_path
 		else
+			flash[:error]= @school.errors.messages
 			render :new
 		end		
 	end

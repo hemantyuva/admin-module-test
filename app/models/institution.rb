@@ -6,8 +6,9 @@ class Institution < ApplicationRecord
 	mount_uploader :logo, ImageUploader
 	enum status: [ :Inactivo, :Activo,:Suspendido,:Eliminado]
     validates_presence_of :name,:location,:contact_number,:email,:latitude,:longitude,:country,:state,:status,:contact_id
-
-	def self.institution_per_month(month)
+    validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+	
+    def self.institution_per_month(month)
     day_in_month = month
     avil = self.where(created_at: Time.now.beginning_of_month..Time.now.end_of_month).map{|x| x.created_at.day}
     over = (day_in_month-avil)

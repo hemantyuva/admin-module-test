@@ -13,7 +13,8 @@ class Admins::TeachersController < ApplicationController
 		if @teacher.save()
 			redirect_to admins_teachers_path
 		else
-			render :new
+		   flash[:error]= @teacher.errors.messages
+		   render :new
 		end
 		
 	end
@@ -24,6 +25,7 @@ class Admins::TeachersController < ApplicationController
 		if @teacher.update(params_teacher)
 			redirect_to admins_teachers_path
 		else
+			flash[:error]= @teacher.errors.messages
 			render :new
 		end			
 	end	

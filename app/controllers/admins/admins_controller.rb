@@ -36,6 +36,7 @@ class Admins::AdminsController < ApplicationController
 			flash[:success]="Admin creadas correctamente"
 			redirect_to admins_admins_path
 		else
+			flash[:error]= @admin.errors.messages
 			render :new
 		end
 		
@@ -61,6 +62,7 @@ class Admins::AdminsController < ApplicationController
 			flash[:success]="Admin actualizadas con éxito"
 			redirect_to admins_admins_path
 		else
+			flash[:error]= @admin.errors.messages
 			render :new
 		end			
 	end

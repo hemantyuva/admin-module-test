@@ -11,7 +11,11 @@
     <div class="clearfix"></div>
     <div class="profile clearfix">
       <div class="profile_pic">
-        <img src="<%=current_admin.try(:image).try(:url)%>" alt="..." class="img-circle profile_img">
+        <%if current_admin.try(:admin).try(:url).nil? %>
+          <img src="/assets/default-admin.png" alt="..." class="img-circle profile_img">
+        <%else%>
+          <img src="<%=current_admin.try(:image).try(:url)%>" alt="..." class="img-circle profile_img">
+        <%end%>
       </div>
       <div class="profile_info">
         <span>Welcome,</span>

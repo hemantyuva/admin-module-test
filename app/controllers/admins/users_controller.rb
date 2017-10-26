@@ -19,6 +19,7 @@ class Admins::UsersController < ApplicationController
 			flash[:success] = "Estudiante creado con éxito"
 			redirect_to admins_users_path
 		else
+			flash[:error]= @user.errors.messages
 			render :new
 		end
 	end
@@ -54,6 +55,7 @@ class Admins::UsersController < ApplicationController
 			flash[:success] = "Estudiante actualizado con éxito"
 			redirect_to admins_users_path
 		else
+			flash[:error]= @user.errors.messages
 			render :new
 		end		
 	end

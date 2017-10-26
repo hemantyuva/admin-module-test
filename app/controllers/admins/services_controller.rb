@@ -17,6 +17,7 @@ class Admins::ServicesController < ApplicationController
 			flash[:success]="servicio creado correctamente"
 			redirect_to admins_services_path
 		else
+			flash[:error]= @service.errors.messages
 			render :new
 		end
 	end
@@ -37,6 +38,7 @@ class Admins::ServicesController < ApplicationController
 			flash[:success]="servicio actualizado con éxito"
 			redirect_to admins_services_path
 		else
+			flash[:error]= @service.errors.messages
 			render :new
 		end		
 	end

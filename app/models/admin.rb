@@ -11,4 +11,6 @@ class Admin < ApplicationRecord
 		 has_many :admin_schools,dependent: :destroy
      has_many :schools, :through => :admin_schools
 		 attr :school_id
+     # validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+
 end
