@@ -18,6 +18,7 @@
  *= require admins/select2.min.css
  *= require admins/custom.css
  *= require admins/style.css
+ *= require admins/dataTables.bootstrap.min.css
  *= require font-awesome
  *= require jquery.timepicker.css
  *= require select2
