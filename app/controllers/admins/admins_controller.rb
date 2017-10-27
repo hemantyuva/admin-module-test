@@ -3,6 +3,7 @@ class Admins::AdminsController < ApplicationController
 	before_action :find_admin,only:[:show,:edit,:update,:destroy]
 	before_action :not_delete,only:[:destroy]
 	def index
+		
 		if current_admin.role.try(:name) == "Administrator"
 		# @admins = Admin.all
 		@admins = Admin.where.not(id: current_admin)
