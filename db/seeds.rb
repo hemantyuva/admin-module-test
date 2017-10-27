@@ -11,6 +11,10 @@ Admin.destroy_all
 
 name = ["Administrator","School manager","Promotions manager","School Assistant","Teachers"]
 name.each do |f|
-	Role.create(name: f)
+	Role.find_or_create_by(name: f)
 end
-Admin.create(name: 'admin',email:"admin@example.com", role_id: Role.first.id ,password: "password")
+Admin.find_or_create_by(name: 'admin',email:"admin@example.com", role_id: Role.first.id ,password: "password")
+Admin.find_or_create_by(name: 'admin',email:"school-ma@example.com", role_id: Role.first.id ,password: "password")
+Admin.find_or_create_by(name: 'admin',email:"promotion-ma@example.com", role_id: Role.second.id ,password: "password")
+Admin.find_or_create_by(name: 'admin',email:"school-assis@example.com", role_id: Role.third.id ,password: "password")
+Admin.find_or_create_by(name: 'admin',email:"teacher@example.com", role_id: Role.fourth.id ,password: "password")

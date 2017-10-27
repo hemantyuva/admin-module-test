@@ -1,68 +1,78 @@
-# config valid only for current version of Capistrano
-lock "3.9.1"
+lock "3.10.0"
 
-set :application, 'studo'
-# set :repo_url, 'git@gitlab.agilekoding.com:studo/admin_module.git' 
-set :repo_url, 'git@github.com:satyampawar/admin-module-test.git'# Edit this to match your repository
-set :branch, :master
-
+set :application, "studo"
+# set :scm, :git
+set :repo_url, "git@github.com:satyampawar/admin-module-test.git"
+server '45.55.253.72', user: 'root', roles: %w{web app}, my_property: :my_value, password: 'Stud0S3rv3r54==='
+set :deploy_to, '/var/www/admin_module'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
-# Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, "/var/www/#{fetch(:application)}"
-
-# Default value for :format is :airbrussh.
-# set :format, :airbrussh
-
-# You can configure the Airbrussh format using :format_options.
-# These are the defaults.
-# set :format_options, command_output: true, log_file: "log/capistrano.log", color: :auto, truncate: :auto
-
 # Default value for :pty is false
-# set :pty, true
-
-# Default value for :linked_files is []
-# append :linked_files, "config/database.yml", "config/application.yml"
-
-set :puma_rackup, -> { File.join(current_path, 'config.ru') }
-set :puma_state, "#{shared_path}/tmp/pids/puma.state"
-set :puma_pid, "#{shared_path}/tmp/pids/puma.pid"
-set :puma_bind, "unix://#{shared_path}/tmp/sockets/puma.sock"    #accept array for multi-bind
-set :puma_conf, "#{shared_path}/puma.rb"
-set :puma_access_log, "#{shared_path}/log/puma_error.log"
-set :puma_error_log, "#{shared_path}/log/puma_access.log"
-set :puma_role, :app
-set :puma_env, fetch(:rack_env, fetch(:rails_env, 'production'))
-set :puma_threads, [0, 8]
-set :puma_workers, 0
-set :puma_worker_timeout, nil
-set :puma_init_active_record, true
-set :puma_preload_app, false
+set :pty, true
 
 # Default value for linked_dirs is []
-# append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
-
-# Default value for default_env is {}
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 
 # Default value for keep_releases is 5
 set :keep_releases, 5
-
 namespace :deploy do
-  task :update_git_repo do
-    on release_roles :all do
-      with fetch(:git_environmental_variables) do
-        within repo_path do
-          current_repo_url = execute :git, :config, :'--get', :'remote.origin.url'
-          unless repo_url == current_repo_url
-            execute :git, :remote, :'set-url', 'origin', repo_url
-            execute :git, :remote, :update
-            execute :git, :config, :'--get', :'remote.origin.url'
-          end
-        end
-      end
+   desc "start resque"
+   task "resque:start" => :app do
+         run "cd #{current_path} && RAILS_ENV=#{environment} BACKGROUND=yes PIDFILE=#{shared_path}/pids/resque.pid QUEUE=* nohup bundle exec rake environment resque:work QUEUE='*' >> #{shared_path}/log/resque.out"
     end
-  end
+
+    desc "stop resque"
+    task "resque:stop" => :app do
+         run "kill -9 `cat #{shared_path}/pids/resque.pid`"
+    end
+
+   desc "ReStart resque"
+   task "resque:restart" => :app do
+         Rake::Task['deploy:resque:stop'].invoke
+         Rake::Task['deploy:resque:start'].invoke
+   end
+
+   desc "start resque scheduler"
+   task "resque:start_scheduler" => :app do
+         run "cd #{current_path} && RAILS_ENV=#{environment} DYNAMIC_SCHEDULE=true BACKGROUND=yes PIDFILE=#{shared_path}/pids/resque_scheduler.pid QUEUE=* nohup bundle exec     rake environment resque:scheduler >> #{shared_path}/log/resque_scheduler.out"
+   end
+
+    desc "stop resque scheduler"
+    task "resque:stop_scheduler" => :app do
+          run "kill -9 `cat #{shared_path}/pids/resque_scheduler.pid`"
+    end
+
+    desc "ReStart resque scheduler"
+    task "resque:restart" => :app do
+         Rake::Task['deploy:resque:stop_scheduler'].invoke
+         Rake::Task['deploy:resque:start_scheduler'].invoke
+    end
+
+
+   desc 'Restart application'
+    task :restart do
+          on roles(:app), in: :sequence, wait: 5 do
+          execute :touch, release_path.join('tmp/restart.txt')
+    end
+    end
+
+   after :publishing, :restart 
+
+   after :restart, :clear_cache do
+   on roles(:web), in: :groups, limit: 3, wait: 10 do
+          execute :touch, 'sudo service nginx restart'
+   end
+
+  # desc "Update crontab with whenever"
+  # task :update_cron do
+  #        on roles(:app) do
+  #               within current_path do
+  #                    execute :bundle, :exec, "whenever --update-crontab #{fetch(:application)}"
+  #               end
+  #        end
+  #  end
+  # after :finishing, 'deploy:update_cron'
+end
 end

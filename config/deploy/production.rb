@@ -13,12 +13,18 @@
 
 
 
-server "165.227.120.4",
-  user: "root",
-  roles: %w{app db web},
-  ssh_options: { forward_agent: true }
+# server "165.227.120.4",
+#   user: "root",
+#   roles: %w{app db web},
+#   ssh_options: { forward_agent: true }
 
 
+role :app, "45.55.253.72"
+role :web, "45.55.253.72"
+role :db,  "45.55.253.72"
+
+server '45.55.253.72', user: 'root', roles: %w{web app}, my_property: :my_value
+       
 
 
 # role-based syntax
