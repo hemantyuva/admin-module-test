@@ -43,7 +43,7 @@
 //= require select2
 
 
-$(document).ready(function(){
-   $('table').DataTable();
+// $(document).ready(function(){
+//    $('table').DataTable();
 
-})
+// })
