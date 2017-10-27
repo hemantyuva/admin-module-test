@@ -35,7 +35,7 @@ group :development do
   # gem 'capistrano-rvm'
   # gem 'capistrano-rbenv'
 end
-gem 'listen', '>= 3.0.5', '< 3.2'
+gem 'listen'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'momentjs-rails'
