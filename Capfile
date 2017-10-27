@@ -6,7 +6,7 @@ require 'capistrano/bundler'
 require 'capistrano/rails'
 require 'capistrano/rvm'
 require 'capistrano/rails/migrations'
-require 'capistrano/sidekiq'  
+# require 'capistrano/sidekiq'  
 
 require "capistrano/scm/git"
 
