@@ -30,10 +30,13 @@ class Admins::AdminsController < ApplicationController
 	def create
 		@admin = Admin.new(params_admin)
 		if @admin.save
-			params[:admin][:school_id].each do |f|
+			institute_array = params[:admin][:institution_id].kind_of?(Array) ? params[:admin][:institution_id] : [params[:admin][:institution_id]]
+			institute_array.select{|k| k!=""}.each do |f|
+				@admin.admin_institutions.create(:institution_id=> f)
+			end
+			params[:admin][:school_id].select{|k| k!=""}.each do |f|
 				@admin.admin_schools.create(:school_id=> f)
 			end
-			
 			flash[:success]="Admin creadas correctamente"
 			redirect_to admins_admins_path
 		else
@@ -44,15 +47,23 @@ class Admins::AdminsController < ApplicationController
 	end
 	def edit
 		admin = Admin.find(params[:id])
-        @institution = admin.institution
+        @institution = admin.institutions.map(&:id)
 		@schools = admin.schools
 		@admin = admin
 	end
 
+	def change_institution_type
+		@value = params[:val].to_i
+	   respond_to do |format|
+	   	 format.js
+	   end
+	end
+
 	def get_school_by_institution
-		institute = Institution.find_by(:id=> params[:institution])
-		if institute.present?
-			render json: {"schools"=> institute.schools}
+		institutions = params[:institution].present? ? params[:institution] : []
+		schools = School.joins(:institution).where("institutions.id IN (?)", institutions)
+		unless schools.empty?
+			render json: {"schools"=> schools}
 		else
 			render json: {"schools"=> []}
 		end	
@@ -60,6 +71,15 @@ class Admins::AdminsController < ApplicationController
 
 	def update
 		if @admin.update(params_admin)
+			institute_array = params[:admin][:institution_id].kind_of?(Array) ? params[:admin][:institution_id] : [params[:admin][:institution_id]]
+			institute_array.select{|k| k!=""}.each do |f|
+				@admin.admin_institutions.destroy_all
+				@admin.admin_institutions.create(:institution_id=> f)
+			end
+			params[:admin][:school_id].select{|k| k!=""}.each do |f|
+				@admin.admin_schools.destroy_all
+				@admin.admin_schools.create(:school_id=> f)
+			end
 			flash[:success]="Admin actualizadas con éxito"
 			redirect_to admins_admins_path
 		else
@@ -108,6 +128,6 @@ class Admins::AdminsController < ApplicationController
 		authorize @admin
 	end
 	def params_admin
-		params.require(:admin).permit(:name,:email,:password,:password_confirmation,:image,:role_id,:institution_id)	
+		params.require(:admin).permit(:name,:email,:password,:password_confirmation,:image,:role_id)	
 	end
 end

@@ -36,14 +36,15 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contact">Institucion ID <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <%= f.collection_select :institution_id, Institution.order(:name,:id), :id, :name,{selected: [@institution.id] ,prompt: "Seleccionar Institucion"}, {class: "form-control"}%>                        
+                <%= f.collection_select :institution_id, Institution.order(:name,:id), :id, :name,{selected: [@institution].flatten ,prompt: "Seleccionar Institucion"}, {class: "form-control" ,multiple: @institution.kind_of?(Array) }%>                        
               </div>
             </div>
             <div class="item form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Escuela <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <%= f.collection_select :school_id, School.order(:name,:id), :id, :name, {selected: @admin.schools.map(&:id)}, {class: "form-control",multiple: true}%>
+                <%= f.collection_select :school_id, School.order(:name,:id), :id, :name, {selected: 
+                  @schools.map(&:id)}, {class: "form-control",multiple: true}%>
               </div>
             </div>
 
@@ -89,39 +90,56 @@
   </div>
 </div>
 
+
 <script type="text/javascript">
 
-$( "#admin_school_id" ).select2()
+  $("#admin_school_id" ).select2()
+  $("#admin_institution_id" ).select2()
+  $("#admin_role_id").change(function(){
+    var val = $(this).val();
+    changeInstitute(val)
+    selectSchool();
+  })
+  
+
 $("#admin_institution_id").change(function(){
-
-
-    $.ajax({
-      type: "POST",
-      url: "/admins/admins/get_school_by_institution",
-      dataType: "json",
-      data: {
-        institution: $("#admin_institution_id").val()
-      },
-      success: function (result) {
-        var school = $("#admin_school_id");
-          school.val("")
+  if($(this).val() != ""){
+    selectSchool()
+  }else{$("#admin_school_id" ).html("")}
+});
+    function selectSchool(){
+         $.ajax({
+        type: "POST",
+        url: "/admins/admins/get_school_by_institution",
+        dataType: "json",
+        data: {
+          institution: $("#admin_institution_id").val()
+        },
+        success: function (result) {
+          var school = $("#admin_school_id");
           if (result && result != null && result.schools.length > 0) {
 
-              school.html('');
+            school.html('');
 
-              for (var i = 0; i < result.schools.length; i++) {
-                  school.append('<option value=' + result.schools[i].id + '>' + result.schools[i].name + '</option>');
-              }
-              
+            for (var i = 0; i < result.schools.length; i++) {
+              school.append('<option value=' + result.schools[i].id + '>' + result.schools[i].name + '</option>');
+            }                    
           }
           else {
-              school.html('');
+            school.html('');
+          }                 
+        }
+      })
+      
+    }
 
-          }
+    function changeInstitute(val){
+        $.ajax({
+        type: "GET",
+        url: "/admins/admins/change_institution_type?val="+val,
+        dataType: "script"
+      })
+    }
 
-           
-      }
-    })
-    })
+  </script>
 
-</script>

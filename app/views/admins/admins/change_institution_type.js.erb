@@ -1,0 +1,12 @@
+$("#institution_type").html("<%=j render partial: 'admins/admins/change_institution_type' %>")
+<% if @value == 1 || @value == 3 %>
+$("#admin_institution_id").select2()
+<%else%>
+$("#institution_type").select2().select2('destroy')
+<%end%>
+
+$("#admin_institution_id").change(function(){
+  if($(this).val() != ""){
+    selectSchool()
+  }else{$("#admin_school_id" ).html("")}
+});

@@ -37,17 +37,11 @@
               <%else%>
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contact">Institucion ID <span class="required">*</span>
               </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-
-                <%= f.collection_select :institution_id, Institution.order(:name,:id), :id, :name, {prompt: "Seleccionar Institucion"}, {class: "form-control"}%>
+              <div id="institution_type" class="col-md-6 col-sm-6 col-xs-12">
+                <%= f.collection_select :institution_id, Institution.order(:name,:id), :id, :name,{prompt: "select institution"}, {class: "form-control"}%>
               </div>
               <%end%>                       
-
             </div>
-
-
-
-
 
             <div class="item form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Escuela <span class="required">*</span>
@@ -117,11 +111,16 @@
 
 <script type="text/javascript">
 
-  $( "#admin_school_id" ).select2()
-    $("#admin_institution_id").change(function(){
+  $("#admin_school_id" ).select2()
+  $("#admin_school_id" ).html('')
+  $("#admin_role_id").change(function(){
+    var val = $(this).val();
+    changeInstitute(val)
+    selectSchool();
+  })
 
-
-      $.ajax({
+    function selectSchool(){
+         $.ajax({
         type: "POST",
         url: "/admins/admins/get_school_by_institution",
         dataType: "json",
@@ -143,7 +142,16 @@
           }                 
         }
       })
-    })
+      
+    }
+
+    function changeInstitute(val){
+        $.ajax({
+        type: "GET",
+        url: "/admins/admins/change_institution_type?val="+val,
+        dataType: "script"
+      })
+    }
 
   </script>
 

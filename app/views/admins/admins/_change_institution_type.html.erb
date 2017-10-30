@@ -1,0 +1,5 @@
+<% if @value == 1 || @value == 3 %>
+<%= select_tag "admin[institution_id]", options_from_collection_for_select(Institution.order(:name,:id), "id", "name"),  multiple: true, class: "form-control" %>
+<%else%>
+<%= select_tag "admin[institution_id]", options_from_collection_for_select(Institution.order(:name,:id), "id", "name"),prompt: "Select Institution", class: "form-control" %>
+<%end%>
