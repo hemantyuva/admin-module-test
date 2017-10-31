@@ -4,6 +4,11 @@ module Admins::InstitutionsHelper
 	end
 	
 	def get_institution
-		[[current_admin.institution.try(:name),current_admin.institution.try(:id)]]
+		arr = []
+		current_admin.institutions.each do |int|
+		arr <<	[int.try(:name), int.try(:id)]
+		end
+		return arr
+		#[[current_admin.institution.try(:name),current_admin.institution.try(:id)]]
 	end
 end

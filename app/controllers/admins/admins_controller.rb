@@ -118,7 +118,7 @@ class Admins::AdminsController < ApplicationController
 		if @admin.role.name == "Administrator"
 			flash[:error]="No se puede eliminar admin."
 			redirect_to admins_admins_path
-		elsif @admin.schools.present? || @admin.institution.present?
+		elsif @admin.schools.present? || @admin.institutions.present?
 			flash[:error]="Admin está siendo utilizado por una institución o escuela y no puede ser removido."
 			redirect_to admins_admins_path
 		end

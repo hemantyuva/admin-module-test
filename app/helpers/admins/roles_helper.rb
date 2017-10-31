@@ -1,6 +1,6 @@
 module Admins::RolesHelper
 	def admin_access
-		(current_admin.role.present?) and (current_admin.role.name == "Administrator")
+		(current_admin.role.present?) and (current_admin.role.name == "Administrator" || current_admin.role.name == "Promotions manager")
 	end
 
 	def admin_sm_sas_access
