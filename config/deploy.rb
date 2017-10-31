@@ -2,7 +2,7 @@ lock "3.10.0"
 
 set :application, "studo"
 # set :scm, :git
-set :repo_url, "git@github.com:satyampawar/admin-module-test.git"
+set :repo_url, "git@github.com:hemantyuva/admin-module-test.git"
 server '45.55.253.72', user: 'root', roles: %w{web app}, my_property: :my_value, password: 'Stud0S3rv3r54==='
 set :deploy_to, '/var/www/admin_module'
 
