@@ -1,4 +1,3 @@
-
 <div class="col-md-3 left_col">
   <div class="left_col scroll-view">
     <div class="navbar nav_title " style="border: 0;">
@@ -30,6 +29,7 @@
         <ul class="nav side-menu" style="">
           <li class=""><a href="<%=root_path%>"> Tablero </a>
           </li>
+          <% unless only_promotion_access %>
           <li class=""><a><i class="fa fa-tags"></i> Ajustes <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu" style="display: none;">
               <%if admin_access%>
@@ -43,6 +43,8 @@
               <%end%>
             </ul>
           </li>
+          <% end %>
+          <% unless only_promotion_access %>
           <li><a><i class="fa fa-file-text-o"></i> Catálogos <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu" style="">
               <%if admin_access%>
@@ -50,7 +52,7 @@
 
               <li><a href="<%=admins_institutions_path%>">Instituciones</a></li>
               <%end%>
-              <%if admin_sm_sas_access%>
+              <%if admin_sm_sas_access && !only_school_assistent_access %>
               <li><a href="<%=admins_schools_path%>">Escuelas</a></li>
               <%end%>
               <%if admin_all_access%>
@@ -74,16 +76,17 @@
 
             </ul>
           </li>
-          <%if admin_sm_sas_access%>
+          <% end %>
+          <%if admin_sm_sas_access && !only_promotion_access%>
           <li><a href="<%=admins_services_path%>"><i class="fa fa-newspaper-o"></i> Servicios </a> 
 
           </li>
           <%end%>
-          <%if promotion_access%>
+          <%if promotion_access && !promotion_ssst_access%>
           <li class=""><a><i class="fa fa-tags"></i> Promociones <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu" style="display: none;">
-              <%if admin_access%>
-              <li><a href="<%=admins_merchants_path%>">Proveedores</a></li>
+              <%if admin_access || only_promotion_access %>
+                <li><a href="<%=admins_merchants_path%>">Proveedores</a></li>
               <%end%>
 
               <li><a href="<%=admins_coupons_path%>">Cupones</a></li>
@@ -99,8 +102,10 @@
           <li><a href="<%=admins_events_path%>"><i class="fa fa-book"></i> Eventos </a>
           </li>
           <%end%>
+          <%unless only_promotion_access%>
           <li><a href="javascript:void(0)"><i class="fa fa-book"></i> Conversaciones </a>
           </li>
+          <%end%>
 
         </ul>
       </div>

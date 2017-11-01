@@ -1,0 +1,9 @@
+<% if @val == "5" %>
+	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+	Subjects <span class="required">*</span>
+	</label>
+	  <div class="col-md-6 col-sm-6 col-xs-12">
+	    <%= select_tag "admin[subject_id]", options_from_collection_for_select(@subjects.order(:name,:id), "id", "name"),prompt: "Select Subject", class: "form-control" %>
+	  </div>
+
+<%end%>

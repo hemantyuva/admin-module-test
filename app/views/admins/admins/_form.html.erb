@@ -51,6 +51,10 @@
               </div>
             </div>
 
+            <div id="teacher-subjects" class="item form-group" style="display:none">
+            </div>
+
+
             <div class="item form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">NOMBRE <span class="required">*</span>
               </label>
@@ -117,10 +121,19 @@
     var val = $(this).val();
     changeInstitute(val)
     selectSchool();
-  })
+    addSubject(val)
+  }) 
+
+  function addSubject(val){
+    $.ajax({
+      type: "GET",
+      url: "/admins/admins/get_subjects?val="+val,
+      dataType: "script"
+    });
+  }
 
     function selectSchool(){
-         $.ajax({
+        $.ajax({
         type: "POST",
         url: "/admins/admins/get_school_by_institution",
         dataType: "json",

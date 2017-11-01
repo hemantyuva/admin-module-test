@@ -59,6 +59,14 @@ class Admins::AdminsController < ApplicationController
 	   end
 	end
 
+	def get_subjects
+		@val = params[:val]
+		@subjects = Subject.all
+		respond_to do |format|
+			format.js
+		end
+	end
+
 	def get_school_by_institution
 		institutions = params[:institution].present? ? params[:institution] : []
 		schools = School.joins(:institution).where("institutions.id IN (?)", institutions)

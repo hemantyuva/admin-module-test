@@ -1,0 +1,6 @@
+$("#teacher-subjects").html("<%=j render partial: 'admins/admins/get_subjects' %>")
+<% if (@val == "5")%>
+$("#teacher-subjects").show();
+<%else%> 
+$("#teacher-subjects").hide(); 
+<%end %>

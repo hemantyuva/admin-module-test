@@ -34,6 +34,9 @@
 //= require admins/jquery.flot.stack.js
 //= require admins/jquery.flot.time.js
 //= require admins/jquery.sparkline.min.js
+
+//= require admins/coords.js
+
 //= require admins/dataTables.bootstrap.min.js
 //= require admins/nprogress.js
 //= require admins/select2.full.min.js

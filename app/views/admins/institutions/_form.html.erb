@@ -87,7 +87,7 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="latitude">Latitude <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <%=f.text_field :latitude,required: "required", class: "form-control col-md-7 col-xs-12", onkeypress: "return isFloat(event)"%> 
+                <%=f.text_field :latitude,required: "required", class: "latlong form-control col-md-7 col-xs-12", onkeypress: "return isFloat(event)"%> 
               </div>
             </div>
             
@@ -95,7 +95,7 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="longitude">Longitude <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <%=f.text_field :longitude,required: "required", class: "form-control col-md-7 col-xs-12", onkeypress: "return isFloat(event)"%> 
+                <%=f.text_field :longitude,required: "required", class: "latlong form-control col-md-7 col-xs-12", onkeypress: "return isFloat(event)"%> 
               </div>
             </div>
             <div class="item form-group">
@@ -150,24 +150,25 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-          $("#institution_logo").on('change', function () {
-            if (typeof(FileReader) != "undefined") {
-                var image_holder = $(".upload_image_box");
-                image_holder.empty();
+    coords.init( '.latlong' );
+    $("#institution_logo").on('change', function () {
+      if (typeof(FileReader) != "undefined") {
+          var image_holder = $(".upload_image_box");
+          image_holder.empty();
 
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $("<img />", {
-                        "src": e.target.result,
-                        "class": "thumb-image resolve",
-                        "style": "width:120px; height:120px;"
-                    }).appendTo(image_holder);
-                }
-                image_holder.show();
-                reader.readAsDataURL($(this)[0].files[0]);
-            } else {
-                alert("This browser does not support FileReader.");
-            }
-        });
-          })
+          var reader = new FileReader();
+          reader.onload = function (e) {
+              $("<img />", {
+                  "src": e.target.result,
+                  "class": "thumb-image resolve",
+                  "style": "width:120px; height:120px;"
+              }).appendTo(image_holder);
+          }
+          image_holder.show();
+          reader.readAsDataURL($(this)[0].files[0]);
+      } else {
+          alert("This browser does not support FileReader.");
+      }
+  });
+    })
 </script>

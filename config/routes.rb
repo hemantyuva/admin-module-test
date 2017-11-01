@@ -23,6 +23,7 @@ Rails.application.routes.draw do
         get :get_profile
         post :update_profile
         post :get_school_by_institution
+        get :get_subjects
         get :change_institution_type
       end
     end
