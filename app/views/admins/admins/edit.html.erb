@@ -48,6 +48,9 @@
               </div>
             </div>
 
+            <div id="teacher-subjects" class="item form-group" style="display:none">
+            </div>
+
             <div class="item form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">NOMBRE <span class="required">*</span>
               </label>
@@ -92,6 +95,12 @@
 
 
 <script type="text/javascript">
+  
+  $(document).ready(function(){
+    var val = $("#admin_role_id").val();
+    addSubject(val)
+  })
+
 
   $("#admin_school_id" ).select2()
   $("#admin_institution_id" ).select2()
@@ -99,7 +108,16 @@
     var val = $(this).val();
     changeInstitute(val)
     selectSchool();
+    addSubject(val)
   })
+
+  function addSubject(val){
+    $.ajax({
+      type: "GET",
+      url: "/admins/admins/get_subjects?val="+val,
+      dataType: "script"
+    });
+  }
   
 
 $("#admin_institution_id").change(function(){

@@ -1,6 +1,7 @@
 $("#teacher-subjects").html("<%=j render partial: 'admins/admins/get_subjects' %>")
 <% if (@val == "5")%>
 $("#teacher-subjects").show();
+$("#admin_subject_id").select2();
 <%else%> 
 $("#teacher-subjects").hide(); 
 <%end %>

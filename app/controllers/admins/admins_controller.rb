@@ -37,6 +37,12 @@ class Admins::AdminsController < ApplicationController
 			params[:admin][:school_id].select{|k| k!=""}.each do |f|
 				@admin.admin_schools.create(:school_id=> f)
 			end
+			if params[:admin][:subject_id].present? 
+				params[:admin][:subject_id].select{|k| k!=""}.each do |f|
+				   @admin.admin_subjects.create(:subject_id=> f)
+				end
+			end
+
 			flash[:success]="Admin creadas correctamente"
 			redirect_to admins_admins_path
 		else
@@ -87,6 +93,12 @@ class Admins::AdminsController < ApplicationController
 			params[:admin][:school_id].select{|k| k!=""}.each do |f|
 				@admin.admin_schools.destroy_all
 				@admin.admin_schools.create(:school_id=> f)
+			end
+			if params[:admin][:subject_id].present? 
+				params[:admin][:subject_id].select{|k| k!=""}.each do |f|
+					@admin.admin_subjects.destroy_all
+				   	@admin.admin_subjects.create(:subject_id=> f)
+				end
 			end
 			flash[:success]="Admin actualizadas con éxito"
 			redirect_to admins_admins_path
