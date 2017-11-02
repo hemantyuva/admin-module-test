@@ -3,7 +3,12 @@ class School < ApplicationRecord
 	belongs_to :contact
 	has_many :users ,dependent: :destroy
 	has_many :subjects ,dependent: :destroy
-	has_many :services ,dependent: :destroy
+
+	 has_many :school_services,dependent: :destroy
+     has_many :services, :through => :school_services
+     attr :service_id
+
+
 	has_many :groups ,dependent: :destroy
 	has_many :events ,dependent: :destroy
 	# has_many :assign_schools ,dependent: :destroy

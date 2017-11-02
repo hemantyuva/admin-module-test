@@ -26,7 +26,7 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Escuela <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <%= f.collection_select :school_id, School.order(:name,:id), :id, :name, {prompt: "Seleccione escuela"}, {class: "form-control"}%>                        
+                <%= f.collection_select :school_id, School.order(:name,:id), :id, :name, {}, {class: "form-control", multiple: true }%>                        
               </div>
             </div>
             <div class="item form-group">
@@ -133,6 +133,7 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+  $("#service_school_id").select2();
    mobileNumberFormat()
     $("#service_photo").on('change', function () {
 

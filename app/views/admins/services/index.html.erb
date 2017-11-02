@@ -43,7 +43,7 @@
                     <%@services.each do |service|%>
                     <tr role="row" class="odd">
                       <td tabindex="0" class="sorting_1"><%=service.id%></td>
-                      <td><%=service.school.try(:name)%></td>
+                      <td><%=service.schools.map(&:name)%></td>
                       <td><%=service.title%></td>
                       <td><%=service.email%></td>
                       <td><%=service.phone_number%></td>

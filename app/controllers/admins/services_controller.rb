@@ -2,7 +2,7 @@ class Admins::ServicesController < ApplicationController
 	before_action :authenticate_admin!
 	before_action :find_service,only:[:show,:edit,:update,:destroy]
 	def index
-		@services = Service.includes(:school).all
+		@services = Service.includes(:schools).all
 		authorize @services
 	end
 
@@ -14,6 +14,9 @@ class Admins::ServicesController < ApplicationController
 	def create
 		@service = Service.new(params_service)
 		if @service.save()
+			params[:service][:school_id].each do |school_id|
+			SchoolService.create(school_id: school_id, service_id:  @service.id)
+			end
 			flash[:success]="servicio creado correctamente"
 			redirect_to admins_services_path
 		else
@@ -35,6 +38,10 @@ class Admins::ServicesController < ApplicationController
 	helper_method :current_user
 	def update
 		if @service.update(params_service)
+			@service.school_services.delete_all
+			params[:service][:school_id].each do |school_id|
+			 SchoolService.create(school_id: school_id, service_id:  @service.id)
+			end
 			flash[:success]="servicio actualizado con éxito"
 			redirect_to admins_services_path
 		else
@@ -58,6 +65,6 @@ class Admins::ServicesController < ApplicationController
 		authorize @service
 	end
 	def params_service
-		params.require(:service).permit(:title,:photo,:description,:email,:phone_number,:school_id,:link,:Document_Link,:Notes)	
+		params.require(:service).permit(:title,:photo,:description,:email,:phone_number,:link,:Document_Link,:Notes)	
 	end
 end
