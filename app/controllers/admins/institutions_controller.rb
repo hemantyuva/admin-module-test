@@ -83,6 +83,21 @@ class Admins::InstitutionsController < ApplicationController
 		authorize @institution
 	end
 	def params_school
-		params.require(:institution).permit(:name , :location , :description , :contact_personal , :contact_number , :email , :latitude , :longitude , :logo , :country , :state , :status , :contact_id)	
+		longitude = {
+		"longitude_coords_degrees"=>params[:longitude_coords_degrees],
+		"longitude_coords_minutes"=>params[:longitude_coords_minutes],
+		"longitude_coords_seconds"=>params[:longitude_coords_seconds],
+		"longitude_compass"=>params[:longitude_compass],
+		"full_longitude" => params[:longitude] 
+	    }
+	    latitude = {
+		"latitude_coords_degrees"=>params[:latitude_coords_degrees],
+		"latitude_coords_minutes"=>params[:latitude_coords_minutes],
+		"latitude_coords_seconds"=>params[:latitude_coords_seconds],
+		"latitude_compass"=>params[:latitude_compass],
+		"full_latitude" => params[:latitude]
+	    }
+		params_value = params.require(:institution).permit(:name , :location , :description , :contact_personal , :contact_number , :email , :logo , :country , :state , :status , :contact_id)	
+	    return params_value.merge!(:latitude =>  latitude, :longitude => longitude)
 	end
 end

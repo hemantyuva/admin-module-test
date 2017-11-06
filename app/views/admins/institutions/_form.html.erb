@@ -86,16 +86,19 @@
             <div class="item form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="latitude">Latitude <span class="required">*</span>
               </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <%=f.text_field :latitude,required: "required", class: "cords latlong form-control col-md-7 col-xs-12", onkeypress: "return isFloat(event)"%> 
+              <div class="col-md-6 col-sm-6 col-xs-12 input input-container coords w2">
+                <%#=f.text_field :latitude,required: "required", class: "cords latlong form-control col-md-7 col-xs-12", onkeypress: "return isFloat(event)"%>
+
+                <input type="coords" id="latitude" class = "cords latlong form-control col-md-7 col-xs-12" required= "required" name="latitude" value= "<%= @institution.latitude['full_latitude'] rescue nil%>">
               </div>
             </div>
                         
             <div class="item form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="longitude">Longitude <span class="required">*</span>
               </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <%=f.text_field :longitude,required: "required", class: "latlong form-control col-md-7 col-xs-12", onkeypress: "return isFloat(event)"%> 
+              <div class="col-md-6 col-sm-6 col-xs-12 input input-container coords w2">
+                <%#=f.text_field :longitude,required: "required", class: "latlong form-control col-md-7 col-xs-12", onkeypress: "return isFloat(event)"%>
+                 <input type="coords" id="longitude" class = "cords latlong form-control col-md-7 col-xs-12" required= "required" name="longitude" value= "<%= @institution.longitude['full_longitude'] rescue nil%>"> 
               </div>
             </div>
             <div class="item form-group">
@@ -130,8 +133,6 @@
                     </div>
               </div>
             </div>
-
-
 
             <div class="ln_solid"></div>
             <div class="form-group">
